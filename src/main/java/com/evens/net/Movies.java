@@ -7,7 +7,6 @@ import java.net.URL;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -40,95 +39,129 @@ public class Movies {
         return line;
     }
 
-//    public static void createTables(){
-//        
-//        String movies = "create table  IF NOT EXISTS movies (movieID int primary key not null, Title VARCHAR(250) not null, genre VARCHAR(250) unique not null)";
-//        String genre =  "create table IF NOT EXISTS Genre(genre VARCHAR(50) unique not null, )";
-//        
+//    public static void createTables() {
+//
+//        String genre = "create table IF NOT EXISTS Genre(genreID SERIAL primary key NOT NULL, genre VARCHAR(50) unique not null)";
+//        String movies = "create table IF NOT EXISTS movies(movieID int primary key not null, title VARCHAR NOT NULL)";
+//        String moviesgenres = "create table IF NOT EXISTS moviesgenres(movieID int not null,genreID integer NOT NULL,primary key(genreid, movieid), FOREIGN KEY (genreid) REFERENCES genre(genreid), FOREIGN KEY (movieID) REFERENCES movies(movieID) )";
+//
 //        Connection con = DB.postgresql();
-//        if(con == null){
+//        if (con == null) {
 //            System.err.println("Connection is null");// check if connection is null
 //            return;
 //        }
 //        try {
-//            PreparedStatement ps = con.prepareStatement(movies);
-//            PreparedStatement ps1 = con.prepareStatement(genre);
+//            PreparedStatement ps = con.prepareStatement(genre);
+//            PreparedStatement ps1 = con.prepareStatement(movies);
+//            PreparedStatement ps2 = con.prepareStatement(moviesgenres);
 //            
 //            int item = ps.executeUpdate();
-//                 System.out.println("created table  >> "+ item);
-//            
+//                 System.out.println("created table genre >> "+ item);
+//
 //            int item1 = ps1.executeUpdate();
-//                 System.out.println("created table  >> "+ item1);
-//                 
-//                 
-//                 
-//                 
+//                 System.out.println("created table  movies >> "+ item1);
+//
+//            int item2 = ps2.executeUpdate();
+//            System.out.println("created table moviesgenres >> " + item2);
+//            
 //        } catch (SQLException ex) {
+//            
 //            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
-//        }     
-//        
+//        }
+//
 //    }
-    public static void insert() {
-        Connection con = DB.postgresql();
-        if (con == null) {
-            System.err.println("Connection is null");
-            return;
-        }
 
-//        JSONArray jsonArray = new JSONArray("[{'name':'evens'},{'name':'even2'}]");
-        try {
-            String json = Movies.Url();
-            JSONArray jsonArray = new JSONArray(json);
-            System.out.println("Converted object = " + json); //Outputting the result
-            System.out.println("..........................................");
-
-            for (int i = 0; i < jsonArray.length(); i++) { //Iterating over array
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String query = "INSERT INTO movies(movieid, title, genre) VALUES (?,?,?) ON CONFLICT (movieid)\n"
-                        + "DO NOTHING;";
-
-                String GenresQuery = "INSERT  INTO Genre(genre) values (?) ON CONFLICT (genre) DO NOTHING";
-
-//                System.out.println(ql);
-                PreparedStatement ps = con.prepareStatement(query);
-                ps.setInt(1, jsonObject.getInt("movieID"));
-                ps.setString(2, jsonObject.getString("title"));
-                ps.setString(3, jsonObject.getString("genre"));
-//                             
-                int item = ps.executeUpdate();
-                System.out.println("Items inserted are >> " + item);
-
-                // Genre table
-                String[] split = jsonObject.getString("genre").split("\\|"); // escape metacharacter
-                
-                // advanced for loop
-                for (String arrayItem : split) {
-//                    System.out.println("Item is "+arrayItem);
-                    PreparedStatement genretable = con.prepareStatement(GenresQuery);
-                    genretable.setString(1, arrayItem);
-                    
-                    int genre = genretable.executeUpdate();
-                    System.out.println("genre data inserted :" + genre);
-
-                }
-            }
-
-        } catch (IOException | SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-//    public static void countGenre(){
+//    public static void insert() {
 //        Connection con = DB.postgresql();
 //        if (con == null) {
 //            System.err.println("Connection is null");
 //            return;
 //        }
-//        
-//        String  count = "select count(movieid) from movies where genre like '%Romance'";       
-//        
-//        
+//
+////        JSONArray jsonArray = new JSONArray("[{'name':'evens'},{'name':'even2'}]");
+//        try {
+//            String json = Movies.Url();
+//            JSONArray jsonArray = new JSONArray(json);
+//            System.out.println("Converted object = " + json); //Outputting the result
+//            System.out.println("..........................................");
+//
+//            for (int i = 0; i < jsonArray.length(); i++) { //Iterating over array
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+////                String query = "INSERT INTO movies(movieid, title, genre) VALUES (?,?,?) ON CONFLICT (movieid)\n"
+////                        + "DO NOTHING;";
+//                String query = "INSERT INTO movies(movieid, title) VALUES (?,?) ON CONFLICT (movieid)\n"
+//                        + "DO NOTHING;";
+//
+//                PreparedStatement ps = con.prepareStatement(query);
+//                ps.setInt(1, jsonObject.getInt("movieID"));
+//                ps.setString(2, jsonObject.getString("title"));
+////             
+//
+//                int item = ps.executeUpdate();// movies table
+//                System.out.println("Items inserted are >> " + item);
+//
+//                // Genre table
+//                String[] split = jsonObject.getString("genre").split("\\|"); // escape metacharacter
+//
+//                // advanced for loop
+//                for (String arrayItem : split) {
+////                    System.out.println("Item is "+arrayItem);
+//                    String GenresQuery = "INSERT  INTO Genre(genre) values (?)"
+//                            + " ON CONFLICT (genre) DO NOTHING";
+//
+//                    PreparedStatement genretable = con.prepareStatement(GenresQuery);
+//                    genretable.setString(1, arrayItem);
+//
+//                    int genre = genretable.executeUpdate();// genre table
+//                    System.out.println("genre data inserted :" + genre);                    
+//                }
+//
+//                // moviesgenres table
+//                for (String genre : split) {
+//                    int id = 0;
+////                   System.out.println("genre is ->> "+ genre);                   
+////                    String gID = "SELECT (genreid) FROM genre WHERE genre ='" + genre + "' ";
+//                    // fetch id of each Genre
+//                    String gID = "SELECT (genreid) FROM genre WHERE genre LIKE ?";
+//                    PreparedStatement result = con.prepareStatement(gID);
+//                    result.setString(1, genre);
+//                    
+//                    ResultSet ID = result.executeQuery();//id moviesgenres table                 
+//                    while (ID.next()) {
+//                        id = ID.getInt("genreid");// get the id
+////                        System.out.println("genre id is ->> " + id);//display
+//                    }
+//
+//
+//                    String moviesgenres = "INSERT INTO moviesgenres (movieid, genreid)\n"
+//                            + "VALUES (?,?)";
+//
+//                    PreparedStatement mg = con.prepareStatement(moviesgenres);
+//                    mg.setInt(1, jsonObject.getInt("movieID"));
+//                    mg.setInt(2, id);                    
+//
+//                    int moviegenre = mg.executeUpdate();// moviesgenres
+//                    System.out.println("moviesgenres data inserted :" + moviegenre);
+//                }
+//
+//            }
+//
+//        } catch (IOException | SQLException ex) {
+//            ex.printStackTrace();
+//            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
 //    }
+
+    public static void countGenre(){
+        Connection con = DB.postgresql();
+        if (con == null) {
+            System.err.println("Connection is null");
+            return;
+        }
+        
+        String  count = "SELECT genreid,COUNT(movieid) as No_of_movies FROM moviesgenres GROUP BY genreid ";       
+        
+        
+    }
 }
