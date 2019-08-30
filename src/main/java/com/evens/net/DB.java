@@ -38,11 +38,9 @@ public class DB {
 //        System.out.println("Testing application");
 
         Movies.Url();
-//        Movies.createTables();
-           
-        
-//        Movies.insert();
-
+        Movies.createTables();       
+        Movies.insert();
+          Movies.countGenre();
     }
 
 }
