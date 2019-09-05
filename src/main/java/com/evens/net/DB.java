@@ -3,11 +3,7 @@ package com.evens.net;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,14 +29,15 @@ public class DB {
         return connection;
     }
 
-    public static void main(String[] args) throws IOException, SQLException {
-        
-//        System.out.println("Testing application");
+    public static void main(String[] args) {
 
+//        System.out.println("Testing application");
         Movies.Url();
-        Movies.createTables();       
+        Movies.createTables();
         Movies.insert();
-          Movies.countGenre();
+        Movies.countGenre();
     }
+
+    
 
 }

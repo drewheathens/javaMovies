@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Movies.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">movies</a> &gt; <a href="index.source.html" class="el_package">com.evens.net</a> &gt; <span class="el_source">Movies.java</span></div><h1>Movies.java</h1><pre class="source lang-java linenums">package com.evens.net;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author evans
+ */
+<span class="nc" id="L25">public class Movies {</span>
+
+//    private static Object response;
+    public static String Url()  {
+        try {
+<span class="fc" id="L30">            String urlString = &quot;https://beep2.cellulant.com:9001/assessment/&quot;;</span>
+            // create the url
+<span class="fc" id="L32">            URL url = new URL(urlString);</span>
+            // open the url stream, wrap it an a few &quot;readers&quot;
+<span class="fc" id="L34">            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));</span>
+            
+            // write the output to stdout
+<span class="fc" id="L37">            String line = reader.readLine(); // json array of records</span>
+<span class="fc" id="L38">            reader.close();</span>
+<span class="fc" id="L39">            return line;</span>
+<span class="nc" id="L40">        } catch (IOException ex) {</span>
+<span class="nc" id="L41">            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
+        }
+<span class="nc" id="L43">        return null;</span>
+        
+    }
+
+    public static void createTables() {
+
+<span class="nc" id="L49">        String genre = &quot;create table IF NOT EXISTS Genre(genreID SERIAL primary key NOT NULL, genre VARCHAR(50) unique not null)&quot;;</span>
+<span class="nc" id="L50">        String movies = &quot;create table IF NOT EXISTS movies(movieID int primary key not null, title VARCHAR NOT NULL)&quot;;</span>
+<span class="nc" id="L51">        String moviesgenres = &quot;create table IF NOT EXISTS moviesgenres(movieID int not null,genreID integer NOT NULL,primary key(genreid, movieid), FOREIGN KEY (genreid) REFERENCES genre(genreid), FOREIGN KEY (movieID) REFERENCES movies(movieID))&quot;;</span>
+
+<span class="nc" id="L53">        Connection con = DB.postgresql();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (con == null) {</span>
+<span class="nc" id="L55">            System.err.println(&quot;Connection is null&quot;);// check if connection is null</span>
+<span class="nc" id="L56">            return;</span>
+        }
+        try {
+<span class="nc" id="L59">            PreparedStatement ps = con.prepareStatement(genre);</span>
+<span class="nc" id="L60">            PreparedStatement ps1 = con.prepareStatement(movies);</span>
+<span class="nc" id="L61">            PreparedStatement ps2 = con.prepareStatement(moviesgenres);</span>
+
+<span class="nc" id="L63">            int item = ps.executeUpdate();</span>
+<span class="nc" id="L64">            System.out.println(&quot;created table genre &gt;&gt; &quot; + item);</span>
+
+<span class="nc" id="L66">            int item1 = ps1.executeUpdate();</span>
+<span class="nc" id="L67">            System.out.println(&quot;created table  movies &gt;&gt; &quot; + item1);</span>
+
+<span class="nc" id="L69">            int item2 = ps2.executeUpdate();</span>
+<span class="nc" id="L70">            System.out.println(&quot;created table moviesgenres &gt;&gt; &quot; + item2);</span>
+
+<span class="nc" id="L72">        } catch (SQLException ex) {</span>
+
+<span class="nc" id="L74">            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L75">        }</span>
+
+<span class="nc" id="L77">    }</span>
+
+    public static void insert() {
+<span class="nc" id="L80">        Connection con = DB.postgresql();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (con == null) {</span>
+<span class="nc" id="L82">            System.err.println(&quot;Connection is null&quot;);</span>
+<span class="nc" id="L83">            return;</span>
+        }
+
+//        JSONArray jsonArray = new JSONArray(&quot;[{'name':'evens'},{'name':'even2'}]&quot;);
+        try {
+<span class="nc" id="L88">            String json = Movies.Url();</span>
+<span class="nc" id="L89">            JSONArray jsonArray = new JSONArray(json);</span>
+<span class="nc" id="L90">            System.out.println(&quot;Converted object = &quot; + json); //Outputting the result</span>
+<span class="nc" id="L91">            System.out.println(&quot;..........................................&quot;);</span>
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            for (int i = 0; i &lt; jsonArray.length(); i++) { //Iterating over array</span>
+<span class="nc" id="L94">                JSONObject jsonObject = jsonArray.getJSONObject(i);</span>
+
+<span class="nc" id="L96">                String query = &quot;INSERT INTO movies(movieid, title) VALUES (?,?) ON CONFLICT (movieid)\n&quot;</span>
+                        + &quot;DO NOTHING;&quot;;
+
+<span class="nc" id="L99">                PreparedStatement ps = con.prepareStatement(query);</span>
+<span class="nc" id="L100">                ps.setInt(1, jsonObject.getInt(&quot;movieID&quot;));</span>
+<span class="nc" id="L101">                ps.setString(2, jsonObject.getString(&quot;title&quot;));             </span>
+
+<span class="nc" id="L103">                int item = ps.executeUpdate();// movies table</span>
+<span class="nc" id="L104">                System.out.println(&quot;Items inserted are &gt;&gt; &quot; + item);</span>
+
+                // Genre table
+<span class="nc" id="L107">                String[] split = jsonObject.getString(&quot;genre&quot;).split(&quot;\\|&quot;); // escape metacharacter</span>
+
+                // advanced for loop
+<span class="nc bnc" id="L110" title="All 2 branches missed.">                for (String arrayItem : split) {// iterating through genres</span>
+//                    System.out.println(&quot;Item is &quot;+arrayItem);
+<span class="nc" id="L112">                    String GenresQuery = &quot;INSERT  INTO Genre(genre) values (?)&quot;</span>
+                            + &quot; ON CONFLICT (genre) DO NOTHING&quot;;
+
+<span class="nc" id="L115">                    PreparedStatement genretable = con.prepareStatement(GenresQuery);</span>
+<span class="nc" id="L116">                    genretable.setString(1, arrayItem);</span>
+
+<span class="nc" id="L118">                    int genre = genretable.executeUpdate();// genre table</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">                    if (genre &gt; 0){</span>
+<span class="nc" id="L120">                        System.out.println(&quot;genre data inserted &gt;&gt;&quot; + genre);                    </span>
+                    }else{
+<span class="nc" id="L122">                        System.out.println(&quot;genre data not inserted &gt;&gt;&quot; + genre);</span>
+                    }
+                    
+                }
+
+                // moviesgenres table
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                for (String genre : split) {</span>
+<span class="nc" id="L129">                    int id = 0;</span>
+
+<span class="nc" id="L131">                    String gID = &quot;SELECT (genreid) FROM genre WHERE genre LIKE ?&quot;;</span>
+<span class="nc" id="L132">                    PreparedStatement result = con.prepareStatement(gID);</span>
+<span class="nc" id="L133">                    result.setString(1, genre);</span>
+
+<span class="nc" id="L135">                    ResultSet ID = result.executeQuery();//id moviesgenres table                 </span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">                    while (ID.next()) {</span>
+<span class="nc" id="L137">                        id = ID.getInt(&quot;genreid&quot;);// get the id</span>
+//                        System.out.println(&quot;genre id is -&gt;&gt; &quot; + id);//display
+                    }
+
+<span class="nc" id="L141">                    String moviesgenres = &quot;INSERT INTO moviesgenres (movieid, genreid)\n&quot;</span>
+                            + &quot;VALUES (?,?) ON CONFLICT (movieid, genreid) DO NOTHING&quot;;
+
+<span class="nc" id="L144">                    PreparedStatement mg = con.prepareStatement(moviesgenres);</span>
+<span class="nc" id="L145">                    mg.setInt(1, jsonObject.getInt(&quot;movieID&quot;));</span>
+<span class="nc" id="L146">                    mg.setInt(2, id);</span>
+
+<span class="nc" id="L148">                    int moviegenre = mg.executeUpdate();// moviesgenres</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">                    if (moviegenre &gt; 0){</span>
+<span class="nc" id="L150">                    System.out.println(&quot;moviesgenres data inserted&quot; + moviegenre);</span>
+                    }else{
+<span class="nc" id="L152">                        System.out.println(&quot;moviesgenres data not inserted &gt;&gt;&quot; + moviegenre);</span>
+                    }
+                    
+                }
+
+            }
+
+<span class="nc" id="L159">        } catch (SQLException ex) {</span>
+<span class="nc" id="L160">            ex.printStackTrace();</span>
+<span class="nc" id="L161">            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L162">        }</span>
+
+<span class="nc" id="L164">    }</span>
+
+    public static void countGenre() {
+
+<span class="nc" id="L168">        String count = &quot;SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre&quot;; // query getting number of movies per genre       </span>
+
+<span class="nc" id="L170">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

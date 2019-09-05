@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="2711" started-at="2019-09-05T11:59:30 EAT" finished-at="2019-09-05T11:59:33 EAT">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="2711" started-at="2019-09-05T11:59:30 EAT" finished-at="2019-09-05T11:59:33 EAT">
+      <class name="com.evens.net.DBTest">
+        <test-method status="PASS" signature="testPostgresql()" name="testPostgresql" duration-ms="36" started-at="2019-09-05T11:59:33 EAT" finished-at="2019-09-05T11:59:33 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPostgresql -->
+      </class> <!-- com.evens.net.DBTest -->
+      <class name="com.evens.net.MoviesTest">
+        <test-method status="PASS" signature="testCreateTables() throws java.sql.SQLException" name="testCreateTables" duration-ms="678" started-at="2019-09-05T11:59:31 EAT" finished-at="2019-09-05T11:59:31 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateTables -->
+        <test-method status="PASS" signature="testUrl()" name="testUrl" duration-ms="2326" started-at="2019-09-05T11:59:31 EAT" finished-at="2019-09-05T11:59:33 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUrl -->
+        <test-method status="PASS" signature="testInsert() throws java.sql.SQLException" name="testInsert" duration-ms="2392" started-at="2019-09-05T11:59:31 EAT" finished-at="2019-09-05T11:59:33 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInsert -->
+      </class> <!-- com.evens.net.MoviesTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
