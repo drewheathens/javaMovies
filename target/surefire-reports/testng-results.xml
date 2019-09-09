@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="19246" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:55 EAT">
+  <suite name="Surefire suite" duration-ms="11877" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:11:08 EAT">
     <groups>
     </groups>
-    <test name="Surefire test" duration-ms="19246" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:55 EAT">
+    <test name="Surefire test" duration-ms="11877" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:11:08 EAT">
       <class name="com.evens.net.DBTest">
-        <test-method status="PASS" signature="testPostgresql()" name="testPostgresql" duration-ms="25" started-at="2019-09-09T11:46:55 EAT" finished-at="2019-09-09T11:46:55 EAT">
+        <test-method status="PASS" signature="testPostgresql() throws java.sql.SQLException" name="testPostgresql" duration-ms="79" started-at="2019-09-09T15:11:08 EAT" finished-at="2019-09-09T15:11:08 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPostgresql -->
       </class> <!-- com.evens.net.DBTest -->
       <class name="com.evens.net.MoviesTest">
-        <test-method status="PASS" signature="testCountGenre()" name="testCountGenre" duration-ms="42" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:36 EAT">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCountGenre -->
-        <test-method status="PASS" signature="testCreateTables() throws java.sql.SQLException" name="testCreateTables" duration-ms="978" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:37 EAT">
+        <test-method status="PASS" signature="testCreateTables() throws java.sql.SQLException" name="testCreateTables" duration-ms="2731" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:10:59 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreateTables -->
-        <test-method status="PASS" signature="testUrl()" name="testUrl" duration-ms="6401" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:42 EAT">
+        <test-method status="PASS" signature="testUrl()" name="testUrl" duration-ms="4533" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:11:01 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUrl -->
-        <test-method status="PASS" signature="testInsertMoviesGenres()" name="testInsertMoviesGenres" duration-ms="10864" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:47 EAT">
+        <test-method status="PASS" signature="testInsertMoviesGenres()" name="testInsertMoviesGenres" duration-ms="7695" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:11:04 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertMoviesGenres -->
-        <test-method status="PASS" signature="testInsertGenres()" name="testInsertGenres" duration-ms="15943" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:52 EAT">
+        <test-method status="PASS" signature="testInsertGenres()" name="testInsertGenres" duration-ms="10561" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:11:07 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertGenres -->
-        <test-method status="PASS" signature="testInsertMovies()" name="testInsertMovies" duration-ms="19007" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:55 EAT">
+        <test-method status="PASS" signature="testInsertMovies()" name="testInsertMovies" duration-ms="11505" started-at="2019-09-09T15:10:56 EAT" finished-at="2019-09-09T15:11:08 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertMovies -->

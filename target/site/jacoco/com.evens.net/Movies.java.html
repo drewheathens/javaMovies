@@ -98,118 +98,116 @@ import org.json.JSONObject;
         }
 <span class="fc" id="L99">        JSONArray JsonArray = Movies.Url();</span>
 
-//        String json = Movies.Url();
-//        JSONArray jsonArray = new JSONArray(json);
 //        System.out.println(&quot;Converted object = &quot; + json); //Outputting the result
-<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (int i = 0; i &lt; JsonArray.length(); i++) {</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for (int i = 0; i &lt; JsonArray.length(); i++) {</span>
             try {
                 //Iterating over array
-<span class="fc" id="L107">                JSONObject jsonObject = JsonArray.getJSONObject(i);</span>
+<span class="fc" id="L105">                JSONObject jsonObject = JsonArray.getJSONObject(i);</span>
 
-<span class="fc" id="L109">                String query = &quot;INSERT INTO movies(movieid, title) VALUES (?,?) ON CONFLICT (movieid)\n&quot;</span>
+<span class="fc" id="L107">                String query = &quot;INSERT INTO movies(movieid, title) VALUES (?,?) ON CONFLICT (movieid)\n&quot;</span>
                         + &quot;DO NOTHING;&quot;;
 
-<span class="fc" id="L112">                PreparedStatement ps = con.prepareStatement(query);</span>
-<span class="fc" id="L113">                ps.setInt(1, jsonObject.getInt(&quot;movieID&quot;));</span>
-<span class="fc" id="L114">                ps.setString(2, jsonObject.getString(&quot;title&quot;));</span>
+<span class="fc" id="L110">                PreparedStatement ps = con.prepareStatement(query);</span>
+<span class="fc" id="L111">                ps.setInt(1, jsonObject.getInt(&quot;movieID&quot;));</span>
+<span class="fc" id="L112">                ps.setString(2, jsonObject.getString(&quot;title&quot;));</span>
 
-<span class="fc" id="L116">                int movie = ps.executeUpdate();// movies table</span>
-<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                if (movie &gt; 0) {</span>
-<span class="nc" id="L118">                    System.out.println(&quot;movie inserted &gt;&gt; &quot; + movie);</span>
+<span class="fc" id="L114">                int movie = ps.executeUpdate();// movies table</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">                if (movie &gt; 0) {</span>
+<span class="nc" id="L116">                    System.out.println(&quot;movie inserted &gt;&gt; &quot; + movie);</span>
                 } else {
-<span class="fc" id="L120">                    System.out.println(&quot;movie already exists!!&quot;</span>
+<span class="fc" id="L118">                    System.out.println(&quot;movie already exists!!&quot;</span>
                             + &quot;  &gt;&gt; &quot; + movie);
                 }
-<span class="nc" id="L123">            } catch (SQLException ex) {</span>
-<span class="nc" id="L124">                Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="fc" id="L125">            }</span>
+<span class="nc" id="L121">            } catch (SQLException ex) {</span>
+<span class="nc" id="L122">                Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="fc" id="L123">            }</span>
 
         }
-<span class="fc" id="L128">    }</span>
+<span class="fc" id="L126">    }</span>
 
     public static void insertGenres() {
-<span class="fc" id="L131">        Connection con = DB.postgresql();</span>
+<span class="fc" id="L129">        Connection con = DB.postgresql();</span>
 
-<span class="fc" id="L133">        JSONArray JsonArray = Movies.Url();</span>
+<span class="fc" id="L131">        JSONArray JsonArray = Movies.Url();</span>
 
-<span class="fc bfc" id="L135" title="All 2 branches covered.">        for (int i = 0; i &lt; JsonArray.length(); i++) {</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (int i = 0; i &lt; JsonArray.length(); i++) {</span>
 
-<span class="fc" id="L137">            JSONObject jsonObject = JsonArray.getJSONObject(i); // Genre table</span>
-<span class="fc" id="L138">            String[] split = jsonObject.getString(&quot;genre&quot;).split(&quot;\\|&quot;); // escape metacharacter</span>
+<span class="fc" id="L135">            JSONObject jsonObject = JsonArray.getJSONObject(i); // Genre table</span>
+<span class="fc" id="L136">            String[] split = jsonObject.getString(&quot;genre&quot;).split(&quot;\\|&quot;); // escape metacharacter</span>
 
             // advanced for loop
-<span class="fc bfc" id="L141" title="All 2 branches covered.">            for (String arrayItem : split) {</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">            for (String arrayItem : split) {</span>
                 try {
                     // iterating through genres
 //                    System.out.println(&quot;Item is &quot;+arrayItem);
-<span class="fc" id="L145">                    String GenresQuery = &quot;INSERT  INTO Genre(genre) values (?)&quot;</span>
+<span class="fc" id="L143">                    String GenresQuery = &quot;INSERT  INTO Genre(genre) values (?)&quot;</span>
                             + &quot; ON CONFLICT (genre) DO NOTHING&quot;;
 
-<span class="fc" id="L148">                    PreparedStatement genretable = con.prepareStatement(GenresQuery);</span>
-<span class="fc" id="L149">                    genretable.setString(1, arrayItem);</span>
+<span class="fc" id="L146">                    PreparedStatement genretable = con.prepareStatement(GenresQuery);</span>
+<span class="fc" id="L147">                    genretable.setString(1, arrayItem);</span>
 
-<span class="fc" id="L151">                    int genre = genretable.executeUpdate();// genre table</span>
-<span class="pc bpc" id="L152" title="1 of 2 branches missed.">                    if (genre &gt; 0) {</span>
-<span class="nc" id="L153">                        System.out.println(&quot;genre data inserted &gt;&gt; &quot; + genre);</span>
+<span class="fc" id="L149">                    int genre = genretable.executeUpdate();// genre table</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">                    if (genre &gt; 0) {</span>
+<span class="nc" id="L151">                        System.out.println(&quot;genre data inserted &gt;&gt; &quot; + genre);</span>
                     } else {
-<span class="fc" id="L155">                        System.out.println(&quot;genre data already exists!! &gt;&gt; &quot; + genre);</span>
+<span class="fc" id="L153">                        System.out.println(&quot;genre data already exists!! &gt;&gt; &quot; + genre);</span>
                     }
-<span class="nc" id="L157">                } catch (SQLException ex) {</span>
-<span class="nc" id="L158">                    Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="fc" id="L159">                }</span>
+<span class="nc" id="L155">                } catch (SQLException ex) {</span>
+<span class="nc" id="L156">                    Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="fc" id="L157">                }</span>
 
             }
         }
-<span class="fc" id="L163">    }</span>
+<span class="fc" id="L161">    }</span>
 
     public static void insertMoviesGenres() {
-<span class="fc" id="L166">        Connection con = DB.postgresql();</span>
-<span class="fc" id="L167">        JSONArray JsonArray = Movies.Url();</span>
-<span class="fc bfc" id="L168" title="All 2 branches covered.">        for (int i = 0; i &lt; JsonArray.length(); i++) {</span>
+<span class="fc" id="L164">        Connection con = DB.postgresql();</span>
+<span class="fc" id="L165">        JSONArray JsonArray = Movies.Url();</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        for (int i = 0; i &lt; JsonArray.length(); i++) {</span>
 
-<span class="fc" id="L170">            JSONObject jsonObject = JsonArray.getJSONObject(i); // moviesgenres table</span>
-<span class="fc" id="L171">            String[] split = jsonObject.getString(&quot;genre&quot;).split(&quot;\\|&quot;); // escape metacharacter</span>
+<span class="fc" id="L168">            JSONObject jsonObject = JsonArray.getJSONObject(i); // moviesgenres table</span>
+<span class="fc" id="L169">            String[] split = jsonObject.getString(&quot;genre&quot;).split(&quot;\\|&quot;); // escape metacharacter</span>
             // moviesgenres table
-<span class="fc bfc" id="L173" title="All 2 branches covered.">            for (String genre : split) {</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">            for (String genre : split) {</span>
                 try {
-<span class="fc" id="L175">                    int id = 0;</span>
+<span class="fc" id="L173">                    int id = 0;</span>
 
-<span class="fc" id="L177">                    String gID = &quot;SELECT (genreid) FROM genre WHERE genre LIKE ?&quot;;</span>
-<span class="fc" id="L178">                    PreparedStatement result = con.prepareStatement(gID);</span>
-<span class="fc" id="L179">                    result.setString(1, genre);</span>
+<span class="fc" id="L175">                    String gID = &quot;SELECT (genreid) FROM genre WHERE genre LIKE ?&quot;;</span>
+<span class="fc" id="L176">                    PreparedStatement result = con.prepareStatement(gID);</span>
+<span class="fc" id="L177">                    result.setString(1, genre);</span>
 
-<span class="fc" id="L181">                    ResultSet ID = result.executeQuery();//id moviesgenres table</span>
-<span class="fc bfc" id="L182" title="All 2 branches covered.">                    while (ID.next()) {</span>
-<span class="fc" id="L183">                        id = ID.getInt(&quot;genreid&quot;);// get the id</span>
+<span class="fc" id="L179">                    ResultSet ID = result.executeQuery();//id moviesgenres table</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">                    while (ID.next()) {</span>
+<span class="fc" id="L181">                        id = ID.getInt(&quot;genreid&quot;);// get the id</span>
 //                        System.out.println(&quot;genre id is -&gt;&gt; &quot; + id);//display
                     }
 
-<span class="fc" id="L187">                    String moviesgenres = &quot;INSERT INTO moviesgenres (movieid, genreid)\n&quot;</span>
+<span class="fc" id="L185">                    String moviesgenres = &quot;INSERT INTO moviesgenres (movieid, genreid)\n&quot;</span>
                             + &quot;VALUES (?,?) ON CONFLICT (movieid, genreid) DO NOTHING&quot;;
 
-<span class="fc" id="L190">                    PreparedStatement mg = con.prepareStatement(moviesgenres);</span>
-<span class="fc" id="L191">                    mg.setInt(1, jsonObject.getInt(&quot;movieID&quot;));</span>
-<span class="fc" id="L192">                    mg.setInt(2, id);</span>
+<span class="fc" id="L188">                    PreparedStatement mg = con.prepareStatement(moviesgenres);</span>
+<span class="fc" id="L189">                    mg.setInt(1, jsonObject.getInt(&quot;movieID&quot;));</span>
+<span class="fc" id="L190">                    mg.setInt(2, id);</span>
 
-<span class="fc" id="L194">                    int moviegenre = mg.executeUpdate();// moviesgenres</span>
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">                    if (moviegenre &gt; 0) {</span>
-<span class="nc" id="L196">                        System.out.println(&quot;moviesgenres data inserted&quot; + moviegenre);</span>
+<span class="fc" id="L192">                    int moviegenre = mg.executeUpdate();// moviesgenres</span>
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">                    if (moviegenre &gt; 0) {</span>
+<span class="nc" id="L194">                        System.out.println(&quot;moviesgenres data inserted&quot; + moviegenre);</span>
                     } else {
-<span class="fc" id="L198">                        System.out.println(&quot;moviesgenres data already exists!! &gt;&gt; &quot; + moviegenre);</span>
+<span class="fc" id="L196">                        System.out.println(&quot;moviesgenres data already exists!! &gt;&gt; &quot; + moviegenre);</span>
                     }
-<span class="nc" id="L200">                } catch (SQLException ex) {</span>
-<span class="nc" id="L201">                    Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="fc" id="L202">                }</span>
+<span class="nc" id="L198">                } catch (SQLException ex) {</span>
+<span class="nc" id="L199">                    Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="fc" id="L200">                }</span>
 
             }
         }
 
-<span class="fc" id="L207">    }</span>
+<span class="fc" id="L205">    }</span>
 
-    public static void countGenre() {
+   
 
-<span class="fc" id="L211">        String count = &quot;SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre&quot;; // query getting number of movies per genre       </span>
+        //String count = &quot;SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre&quot;; // query getting number of movies per genre       
 
-<span class="fc" id="L213">    }</span>
+    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

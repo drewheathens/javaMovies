@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,8 +38,9 @@ public class DBTest {
      * Test of postgresql method, of class DB.
      */
     @Test
-    public void testPostgresql() {
+    public void testPostgresql() throws SQLException {
         System.out.println("postgresql connectivity method test!!");
         assertFalse(actual == null);
+        assertTrue(actual.isValid(0));
     }
 }

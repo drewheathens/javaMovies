@@ -12,11 +12,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
+//import org.junit.runner.RunWith;
+//import org.mockito.runners.MockitoJUnitRunner;
 
 ///**
 // *
 // * @author evans
 // */
+//@RunWith(MockitoJUnitRunner.class)
 public class MoviesTest {
 
     @BeforeClass
@@ -41,6 +44,7 @@ public class MoviesTest {
      * @throws java.lang.Exception
      */
     @Test
+   
     public void testUrl() {
         System.out.println("Url method!!");
         JSONArray actual = Movies.Url();
@@ -93,13 +97,5 @@ public class MoviesTest {
      
     }
 
-    /**
-     * Test of countGenre method, of class Movies.
-     */
-    @Test
-    public void testCountGenre() {
-        System.out.println("countGenre");
-        Movies.countGenre();
-       
-    }
+
 }

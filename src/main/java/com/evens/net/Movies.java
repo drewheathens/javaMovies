@@ -98,8 +98,6 @@ public class Movies {
         }
         JSONArray JsonArray = Movies.Url();
 
-//        String json = Movies.Url();
-//        JSONArray jsonArray = new JSONArray(json);
 //        System.out.println("Converted object = " + json); //Outputting the result
         for (int i = 0; i < JsonArray.length(); i++) {
             try {
@@ -206,9 +204,9 @@ public class Movies {
 
     }
 
-    public static void countGenre() {
+   
 
-        String count = "SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre"; // query getting number of movies per genre       
+        //String count = "SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre"; // query getting number of movies per genre       
 
-    }
+    
 }
