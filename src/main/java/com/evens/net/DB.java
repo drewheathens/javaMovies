@@ -1,6 +1,5 @@
 package com.evens.net;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -34,8 +33,10 @@ public class DB {
 //        System.out.println("Testing application");
         Movies.Url();
         Movies.createTables();
-        Movies.insert();
-        Movies.countGenre();
+        Movies.insertMovies();
+        Movies.insertGenres();
+        Movies.insertMoviesGenres();
+//        Movies.countGenre();
     }
 
     

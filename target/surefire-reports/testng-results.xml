@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="2711" started-at="2019-09-05T11:59:30 EAT" finished-at="2019-09-05T11:59:33 EAT">
+  <suite name="Surefire suite" duration-ms="19246" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:55 EAT">
     <groups>
     </groups>
-    <test name="Surefire test" duration-ms="2711" started-at="2019-09-05T11:59:30 EAT" finished-at="2019-09-05T11:59:33 EAT">
+    <test name="Surefire test" duration-ms="19246" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:55 EAT">
       <class name="com.evens.net.DBTest">
-        <test-method status="PASS" signature="testPostgresql()" name="testPostgresql" duration-ms="36" started-at="2019-09-05T11:59:33 EAT" finished-at="2019-09-05T11:59:33 EAT">
+        <test-method status="PASS" signature="testPostgresql()" name="testPostgresql" duration-ms="25" started-at="2019-09-09T11:46:55 EAT" finished-at="2019-09-09T11:46:55 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPostgresql -->
       </class> <!-- com.evens.net.DBTest -->
       <class name="com.evens.net.MoviesTest">
-        <test-method status="PASS" signature="testCreateTables() throws java.sql.SQLException" name="testCreateTables" duration-ms="678" started-at="2019-09-05T11:59:31 EAT" finished-at="2019-09-05T11:59:31 EAT">
+        <test-method status="PASS" signature="testCountGenre()" name="testCountGenre" duration-ms="42" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:36 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCountGenre -->
+        <test-method status="PASS" signature="testCreateTables() throws java.sql.SQLException" name="testCreateTables" duration-ms="978" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:37 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCreateTables -->
-        <test-method status="PASS" signature="testUrl()" name="testUrl" duration-ms="2326" started-at="2019-09-05T11:59:31 EAT" finished-at="2019-09-05T11:59:33 EAT">
+        <test-method status="PASS" signature="testUrl()" name="testUrl" duration-ms="6401" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:42 EAT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUrl -->
-        <test-method status="PASS" signature="testInsert() throws java.sql.SQLException" name="testInsert" duration-ms="2392" started-at="2019-09-05T11:59:31 EAT" finished-at="2019-09-05T11:59:33 EAT">
+        <test-method status="PASS" signature="testInsertMoviesGenres()" name="testInsertMoviesGenres" duration-ms="10864" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:47 EAT">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testInsert -->
+        </test-method> <!-- testInsertMoviesGenres -->
+        <test-method status="PASS" signature="testInsertGenres()" name="testInsertGenres" duration-ms="15943" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:52 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInsertGenres -->
+        <test-method status="PASS" signature="testInsertMovies()" name="testInsertMovies" duration-ms="19007" started-at="2019-09-09T11:46:36 EAT" finished-at="2019-09-09T11:46:55 EAT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInsertMovies -->
       </class> <!-- com.evens.net.MoviesTest -->
     </test> <!-- Surefire test -->
   </suite> <!-- Surefire suite -->

@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">4 methods,   4 passed</span>
+                    <span class="method-stats">7 methods,   7 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -102,12 +102,27 @@
                     <div class="method-list-content passed suite-Surefire_suite">
                       <span>
                         <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.evens.net.MoviesTest" hash-for-method="testCountGenre">testCountGenre</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.evens.net.MoviesTest" hash-for-method="testCreateTables">testCreateTables</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.evens.net.MoviesTest" hash-for-method="testInsert">testInsert</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.evens.net.MoviesTest" hash-for-method="testInsertGenres">testInsertGenres</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.evens.net.MoviesTest" hash-for-method="testInsertMovies">testInsertMovies</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.evens.net.MoviesTest" hash-for-method="testInsertMoviesGenres">testInsertMoviesGenres</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -135,9 +150,31 @@
           <div class="suite-Surefire_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
+              <span class="class-name">com.evens.net.DBTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPostgresql">
+                  </a> <!-- testPostgresql -->
+                  <span class="method-name">testPostgresql</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
               <span class="class-name">com.evens.net.MoviesTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCountGenre">
+                  </a> <!-- testCountGenre -->
+                  <span class="method-name">testCountGenre</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testCreateTables">
@@ -147,9 +184,23 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testInsert">
-                  </a> <!-- testInsert -->
-                  <span class="method-name">testInsert</span>
+                  <a name="testInsertGenres">
+                  </a> <!-- testInsertGenres -->
+                  <span class="method-name">testInsertGenres</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testInsertMovies">
+                  </a> <!-- testInsertMovies -->
+                  <span class="method-name">testInsertMovies</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testInsertMoviesGenres">
+                  </a> <!-- testInsertMoviesGenres -->
+                  <span class="method-name">testInsertMoviesGenres</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -157,21 +208,6 @@
                   <a name="testUrl">
                   </a> <!-- testUrl -->
                   <span class="method-name">testUrl</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Surefire_suite-class-passed -->
-          <div class="suite-Surefire_suite-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.evens.net.DBTest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="testPostgresql">
-                  </a> <!-- testPostgresql -->
-                  <span class="method-name">testPostgresql</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -228,28 +264,40 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(4);
+data.addRows(7);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testInsert')
+data.setCell(0, 1, 'testInsertMovies')
 data.setCell(0, 2, 'com.evens.net.MoviesTest')
-data.setCell(0, 3, 2392);
+data.setCell(0, 3, 19007);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testUrl')
+data.setCell(1, 1, 'testInsertGenres')
 data.setCell(1, 2, 'com.evens.net.MoviesTest')
-data.setCell(1, 3, 2326);
+data.setCell(1, 3, 15943);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testCreateTables')
+data.setCell(2, 1, 'testInsertMoviesGenres')
 data.setCell(2, 2, 'com.evens.net.MoviesTest')
-data.setCell(2, 3, 678);
+data.setCell(2, 3, 10864);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testPostgresql')
-data.setCell(3, 2, 'com.evens.net.DBTest')
-data.setCell(3, 3, 36);
+data.setCell(3, 1, 'testUrl')
+data.setCell(3, 2, 'com.evens.net.MoviesTest')
+data.setCell(3, 3, 6401);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'testCreateTables')
+data.setCell(4, 2, 'com.evens.net.MoviesTest')
+data.setCell(4, 3, 978);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'testCountGenre')
+data.setCell(5, 2, 'com.evens.net.MoviesTest')
+data.setCell(5, 3, 42);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'testPostgresql')
+data.setCell(6, 2, 'com.evens.net.DBTest')
+data.setCell(6, 3, 25);
 window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 53 seconds</span>
               <div id="times-div-Surefire_suite">
               </div> <!-- times-div-Surefire_suite -->
             </div> <!-- times-div -->
@@ -277,15 +325,27 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">com.evens.net.MoviesTest</div> <!-- chronological-class-name -->
               <div class="test-method">
-                <span class="method-name">testCreateTables</span>
+                <span class="method-name">testCountGenre</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
+                <span class="method-name">testCreateTables</span>
+                <span class="method-start">3 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
                 <span class="method-name">testUrl</span>
+                <span class="method-start">3 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testInsertMoviesGenres</span>
                 <span class="method-start">4 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">testInsert</span>
+                <span class="method-name">testInsertGenres</span>
+                <span class="method-start">4 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testInsertMovies</span>
                 <span class="method-start">5 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
@@ -293,7 +353,7 @@ return data;
               <div class="chronological-class-name">com.evens.net.DBTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">testPostgresql</span>
-                <span class="method-start">2400 ms</span>
+                <span class="method-start">19015 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

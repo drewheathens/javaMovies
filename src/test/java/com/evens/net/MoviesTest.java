@@ -5,25 +5,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static javax.swing.UIManager.getInt;
 import org.json.JSONArray;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
-/**
- *
- * @author evans
- */
+///**
+// *
+// * @author evans
+// */
 public class MoviesTest {
-//
-//    @AfterClass
-//    public void teardown() throws SQLException {
-//        Connection con = DB.postgresql();
-//        Statement statement = con.createStatement();
-//        statement.executeUpdate("DROP TABLE test");
-//    }
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+//
     /**
      * Test of Url() method, of class Movies.
      *
@@ -32,14 +43,14 @@ public class MoviesTest {
     @Test
     public void testUrl() {
         System.out.println("Url method!!");
-        String actual = Movies.Url();
+        JSONArray actual = Movies.Url();
         JSONArray Jsonarray;
         assertNotNull(actual);
     }
-
-    /**
-     * Test of createTables method, of class Movies.
-     */
+//
+//    /**
+//     * Test of createTables method, of class Movies.
+//     */
     @Test
     public void testCreateTables() throws SQLException {
         Connection con = DB.postgresql();
@@ -51,24 +62,44 @@ public class MoviesTest {
 
     }
 
+
     /**
-     * Test of insert method, of class Movies.
-     *
+     * Test of insertMovies method, of class Movies.
      */
     @Test
-    public void testInsert() throws SQLException {
-        Connection con = DB.postgresql();
-        System.out.println("insert test!!");
-        String string = "insert into test(movieID, title) VALUES (1, 'movietest') ON CONFLICT (movieID) DO NOTHING";
-        String fetch = "select movieID from test";
-        PreparedStatement ps = con.prepareStatement(string);
-        int exec = ps.executeUpdate();
+    public void testInsertMovies() {
+        System.out.println("insertMovies");
+        Movies.insertMovies();
 
-        PreparedStatement sel = con.prepareStatement(fetch);
-        ResultSet select = sel.executeQuery();
-        if (select.next()) {
-            assertEquals(1, select.getInt("movieID"));
-        }
+    }
 
+    /**
+     * Test of insertGenres method, of class Movies.
+     */
+    @Test
+    public void testInsertGenres() {
+        System.out.println("insertGenres");
+        Movies.insertGenres();
+   
+    }
+
+    /**
+     * Test of insertMoviesGenres method, of class Movies.
+     */
+    @Test
+    public void testInsertMoviesGenres() {
+        System.out.println("insertMoviesGenres");
+        Movies.insertMoviesGenres();
+     
+    }
+
+    /**
+     * Test of countGenre method, of class Movies.
+     */
+    @Test
+    public void testCountGenre() {
+        System.out.println("countGenre");
+        Movies.countGenre();
+       
     }
 }

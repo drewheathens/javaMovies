@@ -25,7 +25,7 @@ import org.json.JSONObject;
 public class Movies {
 
 //    private static Object response;
-    public static String Url() {
+    public static JSONArray Url() {
         try {
             String urlString = "https://beep2.cellulant.com:9001/assessment/";
             // create the url
@@ -36,7 +36,12 @@ public class Movies {
             // write the output to stdout
             String line = reader.readLine(); // json array of records
             reader.close();
-            return line;
+
+            JSONArray jsonArray = new JSONArray(line);
+            System.out.println("Converted object = " + jsonArray); //Outputting the result
+            System.out.println("..........................................");
+            return jsonArray;
+//            return line;
         } catch (IOException ex) {
             Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,22 +90,21 @@ public class Movies {
 
     }
 
-    public static void insert() {
+    public static void insertMovies() {
         Connection con = DB.postgresql();
         if (con == null) {
             System.err.println("Connection is null");
             return;
         }
+        JSONArray JsonArray = Movies.Url();
 
-//        JSONArray jsonArray = new JSONArray("[{'name':'evens'},{'name':'even2'}]");
-        try {
-            String json = Movies.Url();
-            JSONArray jsonArray = new JSONArray(json);
-            System.out.println("Converted object = " + json); //Outputting the result
-            System.out.println("..........................................");
-
-            for (int i = 0; i < jsonArray.length(); i++) { //Iterating over array
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//        String json = Movies.Url();
+//        JSONArray jsonArray = new JSONArray(json);
+//        System.out.println("Converted object = " + json); //Outputting the result
+        for (int i = 0; i < JsonArray.length(); i++) {
+            try {
+                //Iterating over array
+                JSONObject jsonObject = JsonArray.getJSONObject(i);
 
                 String query = "INSERT INTO movies(movieid, title) VALUES (?,?) ON CONFLICT (movieid)\n"
                         + "DO NOTHING;";
@@ -109,19 +113,34 @@ public class Movies {
                 ps.setInt(1, jsonObject.getInt("movieID"));
                 ps.setString(2, jsonObject.getString("title"));
 
-                int item = ps.executeUpdate();// movies table
-                if (item > 0) {
-                    System.out.println("Item inserted >> " + item);
+                int movie = ps.executeUpdate();// movies table
+                if (movie > 0) {
+                    System.out.println("movie inserted >> " + movie);
                 } else {
-                    System.out.println("Item already exists!!"
-                            + "  >> " + item);
+                    System.out.println("movie already exists!!"
+                            + "  >> " + movie);
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-                // Genre table
-                String[] split = jsonObject.getString("genre").split("\\|"); // escape metacharacter
+        }
+    }
 
-                // advanced for loop
-                for (String arrayItem : split) {// iterating through genres
+    public static void insertGenres() {
+        Connection con = DB.postgresql();
+
+        JSONArray JsonArray = Movies.Url();
+
+        for (int i = 0; i < JsonArray.length(); i++) {
+
+            JSONObject jsonObject = JsonArray.getJSONObject(i); // Genre table
+            String[] split = jsonObject.getString("genre").split("\\|"); // escape metacharacter
+
+            // advanced for loop
+            for (String arrayItem : split) {
+                try {
+                    // iterating through genres
 //                    System.out.println("Item is "+arrayItem);
                     String GenresQuery = "INSERT  INTO Genre(genre) values (?)"
                             + " ON CONFLICT (genre) DO NOTHING";
@@ -135,18 +154,31 @@ public class Movies {
                     } else {
                         System.out.println("genre data already exists!! >> " + genre);
                     }
-
+                } catch (SQLException ex) {
+                    Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                // moviesgenres table
-                for (String genre : split) {
+            }
+        }
+    }
+
+    public static void insertMoviesGenres() {
+        Connection con = DB.postgresql();
+        JSONArray JsonArray = Movies.Url();
+        for (int i = 0; i < JsonArray.length(); i++) {
+
+            JSONObject jsonObject = JsonArray.getJSONObject(i); // moviesgenres table
+            String[] split = jsonObject.getString("genre").split("\\|"); // escape metacharacter
+            // moviesgenres table
+            for (String genre : split) {
+                try {
                     int id = 0;
 
                     String gID = "SELECT (genreid) FROM genre WHERE genre LIKE ?";
                     PreparedStatement result = con.prepareStatement(gID);
                     result.setString(1, genre);
 
-                    ResultSet ID = result.executeQuery();//id moviesgenres table                 
+                    ResultSet ID = result.executeQuery();//id moviesgenres table
                     while (ID.next()) {
                         id = ID.getInt("genreid");// get the id
 //                        System.out.println("genre id is ->> " + id);//display
@@ -165,14 +197,11 @@ public class Movies {
                     } else {
                         System.out.println("moviesgenres data already exists!! >> " + moviegenre);
                     }
-
+                } catch (SQLException ex) {
+                    Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(Movies.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
