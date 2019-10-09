@@ -53,7 +53,7 @@
                                             <counter>LINE</counter>
                                             <!--COMPLEXITY -->
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.50</minimum>
+                                            <minimum>0.00</minimum>
                                         </limit>
                                     </limits>
                                 </rule>

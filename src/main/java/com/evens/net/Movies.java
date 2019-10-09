@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.sql.Connection;
+
 
 
 /*
@@ -23,6 +25,8 @@ import org.json.JSONObject;
  * @author evans
  */
 public class Movies {
+
+    public Connection con = DB.postgresql();
 
 //    private static Object response;
     public static JSONArray Url() {
@@ -49,17 +53,12 @@ public class Movies {
 
     }
 
-    public static void createTables() {
+    public static void createTables(Connection con) {
 
         String genre = "create table IF NOT EXISTS Genre(genreID SERIAL primary key NOT NULL, genre VARCHAR(50) unique not null)";
         String movies = "create table IF NOT EXISTS movies(movieID int primary key not null, title VARCHAR NOT NULL)";
         String moviesgenres = "create table IF NOT EXISTS moviesgenres(movieID int not null,genreID integer NOT NULL,primary key(genreid, movieid), FOREIGN KEY (genreid) REFERENCES genre(genreid), FOREIGN KEY (movieID) REFERENCES movies(movieID))";
 
-        Connection con = DB.postgresql();
-        if (con == null) {
-            System.err.println("Connection is null");// check if connection is null
-            return;
-        }
         try {
             PreparedStatement ps = con.prepareStatement(genre);
             PreparedStatement ps1 = con.prepareStatement(movies);
@@ -90,12 +89,8 @@ public class Movies {
 
     }
 
-    public static void insertMovies() {
-        Connection con = DB.postgresql();
-        if (con == null) {
-            System.err.println("Connection is null");
-            return;
-        }
+    public static void insertMovies(Connection con) {
+
         JSONArray JsonArray = Movies.Url();
 
 //        System.out.println("Converted object = " + json); //Outputting the result
@@ -125,8 +120,8 @@ public class Movies {
         }
     }
 
-    public static void insertGenres() {
-        Connection con = DB.postgresql();
+    public static void insertGenres(Connection con) {
+
 
         JSONArray JsonArray = Movies.Url();
 
@@ -160,8 +155,8 @@ public class Movies {
         }
     }
 
-    public static void insertMoviesGenres() {
-        Connection con = DB.postgresql();
+    public static void insertMoviesGenres(Connection con) {
+
         JSONArray JsonArray = Movies.Url();
         for (int i = 0; i < JsonArray.length(); i++) {
 
@@ -201,6 +196,19 @@ public class Movies {
 
             }
         }
+
+    }
+
+    public static void main(String[] args, Connection con) {
+
+//        System.out.println("Testing application");
+        Movies.Url();
+        Movies.createTables(con);
+        Movies.insertGenres(con);
+        Movies.insertMovies(con);
+        Movies.insertMoviesGenres(con);
+        String count = "SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre";
+        System.out.println("run the query to get number of movies per Genre" + count);
 
     }
 

@@ -16,28 +16,18 @@ import java.sql.SQLException;
 public class DB {
 
     public static Connection postgresql() {
-        Connection connection = null;
+        Connection con = null;
         try {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/moviedb", "evans", "movies");
+            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/moviedb", "evans", "movies");
 
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Connection failure.");
-            return connection;
+            return con;
         }
-        return connection;
+        return con;
     }
 
-    public static void main(String[] args) {
-
-//        System.out.println("Testing application");
-        Movies.Url();
-        Movies.createTables();
-        Movies.insertMovies();
-        Movies.insertGenres();
-        Movies.insertMoviesGenres();
-//        Movies.countGenre();
-    }
 
     
 

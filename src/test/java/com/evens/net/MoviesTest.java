@@ -56,8 +56,8 @@ public class MoviesTest {
 //     * Test of createTables method, of class Movies.
 //     */
     @Test
-    public void testCreateTables() throws SQLException {
-        Connection con = DB.postgresql();
+    public void testCreateTables(Connection con) throws SQLException {
+
         System.out.println("createTables test");
 
         String str = "create table IF NOT EXISTS test(movieID int primary key not null, title VARCHAR NOT NULL)";
@@ -71,9 +71,9 @@ public class MoviesTest {
      * Test of insertMovies method, of class Movies.
      */
     @Test
-    public void testInsertMovies() {
+    public void testInsertMovies(Connection con) {
         System.out.println("insertMovies");
-        Movies.insertMovies();
+        Movies.insertMovies(con);
 
     }
 
@@ -81,9 +81,9 @@ public class MoviesTest {
      * Test of insertGenres method, of class Movies.
      */
     @Test
-    public void testInsertGenres() {
+    public void testInsertGenres(Connection con) {
         System.out.println("insertGenres");
-        Movies.insertGenres();
+        Movies.insertGenres(con);
    
     }
 
@@ -91,9 +91,10 @@ public class MoviesTest {
      * Test of insertMoviesGenres method, of class Movies.
      */
     @Test
-    public void testInsertMoviesGenres() {
+    public void testInsertMoviesGenres(Connection con) {
         System.out.println("insertMoviesGenres");
-        Movies.insertMoviesGenres();
+        Movies.insertMoviesGenres(con);
+
      
     }
 

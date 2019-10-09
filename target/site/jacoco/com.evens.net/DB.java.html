@@ -16,28 +16,18 @@ import java.sql.SQLException;
 <span class="nc" id="L16">public class DB {</span>
 
     public static Connection postgresql() {
-<span class="fc" id="L19">        Connection connection = null;</span>
+<span class="fc" id="L19">        Connection con = null;</span>
         try {
-<span class="fc" id="L21">            connection = DriverManager.getConnection(&quot;jdbc:postgresql://localhost:5432/moviedb&quot;, &quot;evans&quot;, &quot;movies&quot;);</span>
+<span class="fc" id="L21">            con = DriverManager.getConnection(&quot;jdbc:postgresql://localhost:5432/moviedb&quot;, &quot;evans&quot;, &quot;movies&quot;);</span>
 
-<span class="nc" id="L23">        } catch (SQLException e) {</span>
-<span class="nc" id="L24">            e.printStackTrace();</span>
-<span class="nc" id="L25">            System.out.println(&quot;Connection failure.&quot;);</span>
-<span class="nc" id="L26">            return connection;</span>
+<span class="fc" id="L23">        } catch (SQLException e) {</span>
+<span class="fc" id="L24">            e.printStackTrace();</span>
+<span class="fc" id="L25">            System.out.println(&quot;Connection failure.&quot;);</span>
+<span class="fc" id="L26">            return con;</span>
 <span class="fc" id="L27">        }</span>
-<span class="fc" id="L28">        return connection;</span>
+<span class="fc" id="L28">        return con;</span>
     }
 
-    public static void main(String[] args) {
-
-//        System.out.println(&quot;Testing application&quot;);
-<span class="nc" id="L34">        Movies.Url();</span>
-<span class="nc" id="L35">        Movies.createTables();</span>
-<span class="nc" id="L36">        Movies.insertMovies();</span>
-<span class="nc" id="L37">        Movies.insertGenres();</span>
-<span class="nc" id="L38">        Movies.insertMoviesGenres();</span>
-//        Movies.countGenre();
-<span class="nc" id="L40">    }</span>
 
     
 
