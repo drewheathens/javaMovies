@@ -199,18 +199,6 @@ import java.sql.Connection;
 
 <span class="nc" id="L200">    }</span>
 
-    public static void main(String[] args, Connection con) {
-
-//        System.out.println(&quot;Testing application&quot;);
-<span class="nc" id="L205">        Movies.Url();</span>
-<span class="nc" id="L206">        Movies.createTables(con);</span>
-<span class="nc" id="L207">        Movies.insertGenres(con);</span>
-<span class="nc" id="L208">        Movies.insertMovies(con);</span>
-<span class="nc" id="L209">        Movies.insertMoviesGenres(con);</span>
-<span class="nc" id="L210">        String count = &quot;SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre&quot;;</span>
-<span class="nc" id="L211">        System.out.println(&quot;run the query to get number of movies per Genre&quot; + count);</span>
-
-<span class="nc" id="L213">    }</span>
 
    
 

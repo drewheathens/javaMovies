@@ -28,7 +28,17 @@ public class DB {
         return con;
     }
 
+    public static void main(String[] args) {
+        Connection con = DB.postgresql();
+//        System.out.println("Testing application");
+        Movies.Url();
+        Movies.createTables(con);
+        Movies.insertGenres(con);
+        Movies.insertMovies(con);
+        Movies.insertMoviesGenres(con);
+        String count = "SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre";
+        System.out.println("run the query to get number of movies per Genre --> " + count);
 
-    
+    }
 
 }

@@ -20,16 +20,26 @@ import java.sql.SQLException;
         try {
 <span class="fc" id="L21">            con = DriverManager.getConnection(&quot;jdbc:postgresql://localhost:5432/moviedb&quot;, &quot;evans&quot;, &quot;movies&quot;);</span>
 
-<span class="fc" id="L23">        } catch (SQLException e) {</span>
-<span class="fc" id="L24">            e.printStackTrace();</span>
-<span class="fc" id="L25">            System.out.println(&quot;Connection failure.&quot;);</span>
-<span class="fc" id="L26">            return con;</span>
+<span class="nc" id="L23">        } catch (SQLException e) {</span>
+<span class="nc" id="L24">            e.printStackTrace();</span>
+<span class="nc" id="L25">            System.out.println(&quot;Connection failure.&quot;);</span>
+<span class="nc" id="L26">            return con;</span>
 <span class="fc" id="L27">        }</span>
 <span class="fc" id="L28">        return con;</span>
     }
 
+    public static void main(String[] args) {
+<span class="nc" id="L32">        Connection con = DB.postgresql();</span>
+//        System.out.println(&quot;Testing application&quot;);
+<span class="nc" id="L34">        Movies.Url();</span>
+<span class="nc" id="L35">        Movies.createTables(con);</span>
+<span class="nc" id="L36">        Movies.insertGenres(con);</span>
+<span class="nc" id="L37">        Movies.insertMovies(con);</span>
+<span class="nc" id="L38">        Movies.insertMoviesGenres(con);</span>
+<span class="nc" id="L39">        String count = &quot;SELECT genre.genre, COUNT(movieid) AS No_of_movies FROM moviesgenres left join  genre on  genre.genreid = moviesgenres.genreid GROUP BY genre.genre&quot;;</span>
+<span class="nc" id="L40">        System.out.println(&quot;run the query to get number of movies per Genre --&gt; &quot; + count);</span>
 
-    
+<span class="nc" id="L42">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
