@@ -20,11 +20,9 @@ javaMovies is a java application that:
 
 ## Prerequisites
 
-internet access to get the JSONArray.
+internet access to get the JSON response.
 
 ## Installation 
-
-
 
 - install postgresql 
 
